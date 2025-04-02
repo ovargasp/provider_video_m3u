@@ -141,7 +141,9 @@ class Channels(PluginChannels):
                     thumbnail_size = self.get_thumbnail_size(thumbnail, 2, ch_id)
 
                 stream_url = seg.absolute_uri
-
+#               get EXTVLCOPT value from m3u source file
+                evlcopt = seg.vlcopt 
+                
                 if 'group-title' in seg.additional_props:
                     groups_other = seg.additional_props['group-title']
                 else:
@@ -164,6 +166,8 @@ class Channels(PluginChannels):
                     'stream_url': stream_url,
                     'Header': header,
                     'ref_url': ref_url,
+#                   adds EXTVLCOPT value to channel json info in db for later use by channels.m3u output from cabernet.
+                    'extvlcopt': evlcopt,                    
                 }
                 ch_list.append(channel)
 
